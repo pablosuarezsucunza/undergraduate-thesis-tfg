@@ -37,19 +37,16 @@ fans = fans %>%  #get team names as in the other df to make uniting them easier
 ############
 #get playoff attenndnace
 ############
-
-pgames = data.frame(game_id = unique(nfl_selected$game_id[nfl_selected$season_type != 'REG']))
-write.csv2(pgames,  'fans data/playoff fans.csv')
-#manually input Attendance variabl into csv
+#this was manually gathered for each playoff game, can be found in "playoff fands.csv"
 pgames = read.csv2('fans data/playoff fans.csv', header = TRUE)
 
 
-remove()
+
 
 ############
-#Input attendance in main df
+#Assign attendance to each individual game
 ###########
-starttime = Sys.time()
+
 attendance = vector('list', nrow(nfl_filtered))
 for(i in 1:nrow(nfl_selected)){
   df = fans %>%  filter(year == nfl_selected$season[i],
@@ -65,12 +62,13 @@ for(i in 1:nrow(nfl_selected)){
   remove(i, df, df2)
 }
 attendance = data.frame(attendance = do.call(rbind, attendance))
-print(starttime)
-Sys.time()
 
-remove(pgames, starttime, fans)
 
+remove(pgames,fans)
+
+#########
 #input into main df
+########
 nfl_selected =  cbind(nfl_selected, attendance)
 
 
