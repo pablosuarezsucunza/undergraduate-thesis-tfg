@@ -1,4 +1,4 @@
-# Undergraduate thesis (TFG in spanish)
+# Undergraduate thesis 
 
 # Data
 The data cleaning part of the project was done in R. The regressions as well as the table outputs for LaTeX were all done in STATA.
